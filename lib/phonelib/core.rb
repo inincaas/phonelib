@@ -104,13 +104,17 @@ module Phonelib
       country = country_or_default_country(passed_country)
       if phone.nil? || country.nil?
         # has to return instance of Phonelib::Phone even if no phone passed
+        puts "path 1 -- #{phone}:#{passed_country.inspect}"
         Phonelib::Phone.new(phone, @@phone_data)
       else
         detected = detect_and_parse_by_country(phone, country)
+        puts "#{passed_country.nil?} : #{!!@@default_country} : #{detected.invalid?}"
         if passed_country.nil? && @@default_country && detected.invalid?
+          puts "path 2 -- #{phone}:#{passed_country.inspect}"
           Phonelib::Phone.new(phone, @@phone_data)
         else
-          detected
+          puts "path 3 -- #{phone}:#{passed_country.inspect}"
+          Phonelib::Phone.new(detected.international, @@phone_data)
         end
       end
     end
@@ -151,7 +155,7 @@ module Phonelib
     def load_data
       require 'yaml'
       # ensure we are using Syck engine for yaml parsing
-      YAML::ENGINE.yamler = 'syck'
+      YAML::ENGINE.yamler = 'psych'
       data_file = File.dirname(__FILE__) + '/../../data/phone_data.yml'
       @@phone_data ||= YAML.load_file(data_file)
     end
@@ -172,19 +176,19 @@ module Phonelib
     end
 
     # Create phone representation in e164 format
-    def convert_phone_to_e164(phone, data) #prefix, national_prefix)
+    def convert_phone_to_e164(phone, data) # prefix, national_prefix)
       rx = []
       rx << "(#{data[Core::INTERNATIONAL_PREFIX]})?"
       rx << "(#{data[Core::COUNTRY_CODE]})?"
       rx << "(#{data[Core::NATIONAL_PREFIX]})?"
       rx << "(#{data[Core::TYPES][Core::GENERAL][Core::VALID_PATTERN]})"
-
-      match = phone.gsub('+', '').match(/^#{rx.join}$/)
+      matcher = /^#{rx.join}$/
+      match = phone.gsub('+', '').match(matcher)
       if match
-        national_start = 1.upto(3).map {|i| match[i].to_s.length}.inject(:+)
+        national_start = 1.upto(3).map { |i| match[i].to_s.length }.inject(:+)
         "#{data[Core::COUNTRY_CODE]}#{phone[national_start..-1]}"
       else
-        phone
+        phone.sub(/^#{data[Core::INTERNATIONAL_PREFIX]}/, '+')
       end
     end
   end

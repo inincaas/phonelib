@@ -1,6 +1,5 @@
 module Phonelib
   module PhoneAnalyzer
-
     # array of types not included for validation check in cycle
     NOT_FOR_CHECK = [:general_desc, :fixed_line, :mobile, :fixed_or_mobile]
 
@@ -8,11 +7,12 @@ module Phonelib
     # analyze
     def analyze(phone, country_data)
       country_data.each do |data|
-        if country_match = phone_match_data?(phone, data)
+        country_match = phone_match_data?(phone, data)
+        if country_match
           return get_national_and_data(phone, data, country_match)
         end
       end
-      [ '', {} ]
+      ['', {}]
     end
 
     private
@@ -25,7 +25,7 @@ module Phonelib
       national = phone[prefix_length..-1]
       data[:format] = get_number_format(national, data[Core::FORMATS])
       data.merge! all_number_types(national, data[Core::TYPES])
-      [ national, { data[:id] => data } ]
+      [national, { data[:id] => data }]
     end
 
     # Check if sanitized phone match country data

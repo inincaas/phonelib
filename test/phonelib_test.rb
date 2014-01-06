@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class PhonelibTest < Test::Unit::TestCase
-
   should 'be a Module' do
     assert_kind_of Module, Phonelib
   end
@@ -10,7 +9,7 @@ class PhonelibTest < Test::Unit::TestCase
     setup { @phone = Phonelib.parse '9721234567' }
 
     should 'return a Phone object' do
-      assert @phone.is_a? Phonelib::Phone #instance_of?
+      assert @phone.is_a? Phonelib::Phone # instance_of?
     end
 
     should 'be possible but not valid phone number' do

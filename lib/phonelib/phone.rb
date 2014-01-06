@@ -16,6 +16,7 @@ module Phonelib
     # * +country_data+ - Hash of data for parsing
     #
     def initialize(phone, country_data)
+      puts phone
       @original = phone
       @sanitized = sanitize_phone(@original)
       if @sanitized.empty?
