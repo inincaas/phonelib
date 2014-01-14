@@ -104,16 +104,12 @@ module Phonelib
       country = country_or_default_country(passed_country)
       if phone.nil? || country.nil?
         # has to return instance of Phonelib::Phone even if no phone passed
-        puts "path 1 -- #{phone}:#{passed_country.inspect}"
         Phonelib::Phone.new(phone, @@phone_data)
       else
         detected = detect_and_parse_by_country(phone, country)
-        puts "#{passed_country.nil?} : #{!!@@default_country} : #{detected.invalid?}"
         if passed_country.nil? && @@default_country && detected.invalid?
-          puts "path 2 -- #{phone}:#{passed_country.inspect}"
           Phonelib::Phone.new(phone, @@phone_data)
         else
-          puts "path 3 -- #{phone}:#{passed_country.inspect}"
           Phonelib::Phone.new(detected.international, @@phone_data)
         end
       end
@@ -154,7 +150,9 @@ module Phonelib
     # Load data file into memory
     def load_data
       data_file = File.dirname(__FILE__) + '/../../data/phone_data.dat'
-      @@phone_data ||= Marshal.load(File.read(data_file))
+      File.open(data_file, 'rb') do |f|
+        @@phone_data ||= Marshal.load(f)
+      end
     end
 
     # Get country that was provided or default country in needable format
