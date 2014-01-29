@@ -67,11 +67,7 @@ module Phonelib
       @country ||= begin
         valid_countries.find do |iso2|
           @analyzed_data[iso2][Core::MAIN_COUNTRY_FOR_CODE] == 'true'
-<<<<<<< HEAD
-        end || valid_countries.first
-=======
         end || valid_countries.first || countries.first
->>>>>>> upstream/master
       end
     end
 

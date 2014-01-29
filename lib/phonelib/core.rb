@@ -150,7 +150,9 @@ module Phonelib
     # Load data file into memory
     def load_data
       data_file = File.dirname(__FILE__) + '/../../data/phone_data.dat'
-      @@phone_data ||= Marshal.load(File.read(data_file))
+      File.open(data_file, 'rb') do |f|
+        @@phone_data ||= Marshal.load(f)
+      end
     end
 
     # Get country that was provided or default country in needable format

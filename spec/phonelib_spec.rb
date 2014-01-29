@@ -277,7 +277,10 @@ describe Phonelib do
   context 'example numbers' do
     it 'be valid' do
       data_file = File.dirname(__FILE__) + '/../data/phone_data.dat'
-      phone_data ||= Marshal.load(File.read(data_file))
+      phone_data = nil
+      File.open(data_file, 'rb') do |f|
+        phone_data = Marshal.load(f)
+      end
       phone_data.each do |data|
         country = data[:id]
         next unless country =~ /[A-Z]{2}/
