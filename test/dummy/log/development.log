@@ -1,0 +1,237 @@
+Connecting to database specified by database.yml
+
+
+Started GET "/" for 127.0.0.1 at 2013-12-11 13:23:38 -0500
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+
+LoadError (Please install the sqlite3 adapter: `gem install activerecord-sqlite3-adapter` (cannot load such file -- sqlite3/sqlite3_native)):
+  activesupport (3.2.14) lib/active_support/dependencies.rb:251:in `require'
+  activesupport (3.2.14) lib/active_support/dependencies.rb:251:in `block in require'
+  activesupport (3.2.14) lib/active_support/dependencies.rb:236:in `load_dependency'
+  activesupport (3.2.14) lib/active_support/dependencies.rb:251:in `require'
+  sqlite3-1.3.7-x86 (mingw32) lib/sqlite3.rb:6:in `rescue in <top (required)>'
+  sqlite3-1.3.7-x86 (mingw32) lib/sqlite3.rb:2:in `<top (required)>'
+  activesupport (3.2.14) lib/active_support/dependencies.rb:251:in `require'
+  activesupport (3.2.14) lib/active_support/dependencies.rb:251:in `block in require'
+  activesupport (3.2.14) lib/active_support/dependencies.rb:236:in `load_dependency'
+  activesupport (3.2.14) lib/active_support/dependencies.rb:251:in `require'
+  activerecord (3.2.14) lib/active_record/connection_adapters/sqlite3_adapter.rb:4:in `<top (required)>'
+  activesupport (3.2.14) lib/active_support/dependencies.rb:251:in `require'
+  activesupport (3.2.14) lib/active_support/dependencies.rb:251:in `block in require'
+  activesupport (3.2.14) lib/active_support/dependencies.rb:236:in `load_dependency'
+  activesupport (3.2.14) lib/active_support/dependencies.rb:251:in `require'
+  activerecord (3.2.14) lib/active_record/connection_adapters/abstract/connection_specification.rb:50:in `resolve_hash_connection'
+  activerecord (3.2.14) lib/active_record/connection_adapters/abstract/connection_specification.rb:41:in `resolve_string_connection'
+  activerecord (3.2.14) lib/active_record/connection_adapters/abstract/connection_specification.rb:25:in `spec'
+  activerecord (3.2.14) lib/active_record/connection_adapters/abstract/connection_specification.rb:130:in `establish_connection'
+  activerecord (3.2.14) lib/active_record/railtie.rb:88:in `block (2 levels) in <class:Railtie>'
+  activesupport (3.2.14) lib/active_support/lazy_load_hooks.rb:36:in `instance_eval'
+  activesupport (3.2.14) lib/active_support/lazy_load_hooks.rb:36:in `execute_hook'
+  activesupport (3.2.14) lib/active_support/lazy_load_hooks.rb:43:in `block in run_load_hooks'
+  activesupport (3.2.14) lib/active_support/lazy_load_hooks.rb:42:in `each'
+  activesupport (3.2.14) lib/active_support/lazy_load_hooks.rb:42:in `run_load_hooks'
+  activerecord (3.2.14) lib/active_record/base.rb:720:in `<top (required)>'
+  activerecord (3.2.14) lib/active_record/query_cache.rb:67:in `rescue in call'
+  activerecord (3.2.14) lib/active_record/query_cache.rb:61:in `call'
+  activerecord (3.2.14) lib/active_record/connection_adapters/abstract/connection_pool.rb:479:in `call'
+  actionpack (3.2.14) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'
+  activesupport (3.2.14) lib/active_support/callbacks.rb:405:in `_run__863544165__call__399969654__callbacks'
+  activesupport (3.2.14) lib/active_support/callbacks.rb:405:in `__run_callback'
+  activesupport (3.2.14) lib/active_support/callbacks.rb:385:in `_run_call_callbacks'
+  activesupport (3.2.14) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (3.2.14) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (3.2.14) lib/action_dispatch/middleware/reloader.rb:65:in `call'
+  actionpack (3.2.14) lib/action_dispatch/middleware/remote_ip.rb:31:in `call'
+  actionpack (3.2.14) lib/action_dispatch/middleware/debug_exceptions.rb:16:in `call'
+  actionpack (3.2.14) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.14) lib/rails/rack/logger.rb:32:in `call_app'
+  railties (3.2.14) lib/rails/rack/logger.rb:16:in `block in call'
+  activesupport (3.2.14) lib/active_support/tagged_logging.rb:22:in `tagged'
+  railties (3.2.14) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.14) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.5) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.5) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.14) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.5) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.14) lib/action_dispatch/middleware/static.rb:63:in `call'
+  railties (3.2.14) lib/rails/engine.rb:484:in `call'
+  railties (3.2.14) lib/rails/application.rb:231:in `call'
+  rack (1.4.5) lib/rack/content_length.rb:14:in `call'
+  railties (3.2.14) lib/rails/rack/log_tailer.rb:17:in `call'
+  rack (1.4.5) lib/rack/handler/webrick.rb:59:in `service'
+  C:/Ruby200/lib/ruby/2.0.0/webrick/httpserver.rb:138:in `service'
+  C:/Ruby200/lib/ruby/2.0.0/webrick/httpserver.rb:94:in `run'
+  C:/Ruby200/lib/ruby/2.0.0/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered C:/Ruby200/lib/ruby/gems/2.0.0/gems/actionpack-3.2.14/lib/action_dispatch/middleware/templates/rescues/_trace.erb (2.0ms)
+  Rendered C:/Ruby200/lib/ruby/gems/2.0.0/gems/actionpack-3.2.14/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (93.1ms)
+  Rendered C:/Ruby200/lib/ruby/gems/2.0.0/gems/actionpack-3.2.14/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (122.1ms)
+Connecting to database specified by database.yml
+
+
+Started GET "/" for 127.0.0.1 at 2013-12-11 13:24:02 -0500
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+
+LoadError (Please install the sqlite3 adapter: `gem install activerecord-sqlite3-adapter` (cannot load such file -- sqlite3/sqlite3_native)):
+  activesupport (3.2.14) lib/active_support/dependencies.rb:251:in `require'
+  activesupport (3.2.14) lib/active_support/dependencies.rb:251:in `block in require'
+  activesupport (3.2.14) lib/active_support/dependencies.rb:236:in `load_dependency'
+  activesupport (3.2.14) lib/active_support/dependencies.rb:251:in `require'
+  sqlite3-1.3.7-x86 (mingw32) lib/sqlite3.rb:6:in `rescue in <top (required)>'
+  sqlite3-1.3.7-x86 (mingw32) lib/sqlite3.rb:2:in `<top (required)>'
+  activesupport (3.2.14) lib/active_support/dependencies.rb:251:in `require'
+  activesupport (3.2.14) lib/active_support/dependencies.rb:251:in `block in require'
+  activesupport (3.2.14) lib/active_support/dependencies.rb:236:in `load_dependency'
+  activesupport (3.2.14) lib/active_support/dependencies.rb:251:in `require'
+  activerecord (3.2.14) lib/active_record/connection_adapters/sqlite3_adapter.rb:4:in `<top (required)>'
+  activesupport (3.2.14) lib/active_support/dependencies.rb:251:in `require'
+  activesupport (3.2.14) lib/active_support/dependencies.rb:251:in `block in require'
+  activesupport (3.2.14) lib/active_support/dependencies.rb:236:in `load_dependency'
+  activesupport (3.2.14) lib/active_support/dependencies.rb:251:in `require'
+  activerecord (3.2.14) lib/active_record/connection_adapters/abstract/connection_specification.rb:50:in `resolve_hash_connection'
+  activerecord (3.2.14) lib/active_record/connection_adapters/abstract/connection_specification.rb:41:in `resolve_string_connection'
+  activerecord (3.2.14) lib/active_record/connection_adapters/abstract/connection_specification.rb:25:in `spec'
+  activerecord (3.2.14) lib/active_record/connection_adapters/abstract/connection_specification.rb:130:in `establish_connection'
+  activerecord (3.2.14) lib/active_record/railtie.rb:88:in `block (2 levels) in <class:Railtie>'
+  activesupport (3.2.14) lib/active_support/lazy_load_hooks.rb:36:in `instance_eval'
+  activesupport (3.2.14) lib/active_support/lazy_load_hooks.rb:36:in `execute_hook'
+  activesupport (3.2.14) lib/active_support/lazy_load_hooks.rb:43:in `block in run_load_hooks'
+  activesupport (3.2.14) lib/active_support/lazy_load_hooks.rb:42:in `each'
+  activesupport (3.2.14) lib/active_support/lazy_load_hooks.rb:42:in `run_load_hooks'
+  activerecord (3.2.14) lib/active_record/base.rb:720:in `<top (required)>'
+  activerecord (3.2.14) lib/active_record/query_cache.rb:67:in `rescue in call'
+  activerecord (3.2.14) lib/active_record/query_cache.rb:61:in `call'
+  activerecord (3.2.14) lib/active_record/connection_adapters/abstract/connection_pool.rb:479:in `call'
+  actionpack (3.2.14) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'
+  activesupport (3.2.14) lib/active_support/callbacks.rb:405:in `_run__863544165__call__399969654__callbacks'
+  activesupport (3.2.14) lib/active_support/callbacks.rb:405:in `__run_callback'
+  activesupport (3.2.14) lib/active_support/callbacks.rb:385:in `_run_call_callbacks'
+  activesupport (3.2.14) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (3.2.14) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (3.2.14) lib/action_dispatch/middleware/reloader.rb:65:in `call'
+  actionpack (3.2.14) lib/action_dispatch/middleware/remote_ip.rb:31:in `call'
+  actionpack (3.2.14) lib/action_dispatch/middleware/debug_exceptions.rb:16:in `call'
+  actionpack (3.2.14) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.14) lib/rails/rack/logger.rb:32:in `call_app'
+  railties (3.2.14) lib/rails/rack/logger.rb:16:in `block in call'
+  activesupport (3.2.14) lib/active_support/tagged_logging.rb:22:in `tagged'
+  railties (3.2.14) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.14) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.5) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.5) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.14) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.5) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.14) lib/action_dispatch/middleware/static.rb:63:in `call'
+  railties (3.2.14) lib/rails/engine.rb:484:in `call'
+  railties (3.2.14) lib/rails/application.rb:231:in `call'
+  rack (1.4.5) lib/rack/content_length.rb:14:in `call'
+  railties (3.2.14) lib/rails/rack/log_tailer.rb:17:in `call'
+  rack (1.4.5) lib/rack/handler/webrick.rb:59:in `service'
+  C:/Ruby200/lib/ruby/2.0.0/webrick/httpserver.rb:138:in `service'
+  C:/Ruby200/lib/ruby/2.0.0/webrick/httpserver.rb:94:in `run'
+  C:/Ruby200/lib/ruby/2.0.0/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered C:/Ruby200/lib/ruby/gems/2.0.0/gems/actionpack-3.2.14/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+  Rendered C:/Ruby200/lib/ruby/gems/2.0.0/gems/actionpack-3.2.14/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.0ms)
+  Rendered C:/Ruby200/lib/ruby/gems/2.0.0/gems/actionpack-3.2.14/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (9.0ms)
+Connecting to database specified by database.yml
+
+
+Started GET "/" for 127.0.0.1 at 2013-12-11 13:28:09 -0500
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+
+LoadError (Please install the sqlite3 adapter: `gem install activerecord-sqlite3-adapter` (cannot load such file -- sqlite3/sqlite3_native)):
+  activesupport (3.2.14) lib/active_support/dependencies.rb:251:in `require'
+  activesupport (3.2.14) lib/active_support/dependencies.rb:251:in `block in require'
+  activesupport (3.2.14) lib/active_support/dependencies.rb:236:in `load_dependency'
+  activesupport (3.2.14) lib/active_support/dependencies.rb:251:in `require'
+  sqlite3-1.3.7-x86 (mingw32) lib/sqlite3.rb:6:in `rescue in <top (required)>'
+  sqlite3-1.3.7-x86 (mingw32) lib/sqlite3.rb:2:in `<top (required)>'
+  activesupport (3.2.14) lib/active_support/dependencies.rb:251:in `require'
+  activesupport (3.2.14) lib/active_support/dependencies.rb:251:in `block in require'
+  activesupport (3.2.14) lib/active_support/dependencies.rb:236:in `load_dependency'
+  activesupport (3.2.14) lib/active_support/dependencies.rb:251:in `require'
+  activerecord (3.2.14) lib/active_record/connection_adapters/sqlite3_adapter.rb:4:in `<top (required)>'
+  activesupport (3.2.14) lib/active_support/dependencies.rb:251:in `require'
+  activesupport (3.2.14) lib/active_support/dependencies.rb:251:in `block in require'
+  activesupport (3.2.14) lib/active_support/dependencies.rb:236:in `load_dependency'
+  activesupport (3.2.14) lib/active_support/dependencies.rb:251:in `require'
+  activerecord (3.2.14) lib/active_record/connection_adapters/abstract/connection_specification.rb:50:in `resolve_hash_connection'
+  activerecord (3.2.14) lib/active_record/connection_adapters/abstract/connection_specification.rb:41:in `resolve_string_connection'
+  activerecord (3.2.14) lib/active_record/connection_adapters/abstract/connection_specification.rb:25:in `spec'
+  activerecord (3.2.14) lib/active_record/connection_adapters/abstract/connection_specification.rb:130:in `establish_connection'
+  activerecord (3.2.14) lib/active_record/railtie.rb:88:in `block (2 levels) in <class:Railtie>'
+  activesupport (3.2.14) lib/active_support/lazy_load_hooks.rb:36:in `instance_eval'
+  activesupport (3.2.14) lib/active_support/lazy_load_hooks.rb:36:in `execute_hook'
+  activesupport (3.2.14) lib/active_support/lazy_load_hooks.rb:43:in `block in run_load_hooks'
+  activesupport (3.2.14) lib/active_support/lazy_load_hooks.rb:42:in `each'
+  activesupport (3.2.14) lib/active_support/lazy_load_hooks.rb:42:in `run_load_hooks'
+  activerecord (3.2.14) lib/active_record/base.rb:720:in `<top (required)>'
+  activerecord (3.2.14) lib/active_record/query_cache.rb:67:in `rescue in call'
+  activerecord (3.2.14) lib/active_record/query_cache.rb:61:in `call'
+  activerecord (3.2.14) lib/active_record/connection_adapters/abstract/connection_pool.rb:479:in `call'
+  actionpack (3.2.14) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'
+  activesupport (3.2.14) lib/active_support/callbacks.rb:405:in `_run__768995721__call__869318588__callbacks'
+  activesupport (3.2.14) lib/active_support/callbacks.rb:405:in `__run_callback'
+  activesupport (3.2.14) lib/active_support/callbacks.rb:385:in `_run_call_callbacks'
+  activesupport (3.2.14) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (3.2.14) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (3.2.14) lib/action_dispatch/middleware/reloader.rb:65:in `call'
+  actionpack (3.2.14) lib/action_dispatch/middleware/remote_ip.rb:31:in `call'
+  actionpack (3.2.14) lib/action_dispatch/middleware/debug_exceptions.rb:16:in `call'
+  actionpack (3.2.14) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.14) lib/rails/rack/logger.rb:32:in `call_app'
+  railties (3.2.14) lib/rails/rack/logger.rb:16:in `block in call'
+  activesupport (3.2.14) lib/active_support/tagged_logging.rb:22:in `tagged'
+  railties (3.2.14) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.14) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.5) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.5) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.14) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.5) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.14) lib/action_dispatch/middleware/static.rb:63:in `call'
+  railties (3.2.14) lib/rails/engine.rb:484:in `call'
+  railties (3.2.14) lib/rails/application.rb:231:in `call'
+  rack (1.4.5) lib/rack/content_length.rb:14:in `call'
+  railties (3.2.14) lib/rails/rack/log_tailer.rb:17:in `call'
+  rack (1.4.5) lib/rack/handler/webrick.rb:59:in `service'
+  C:/Ruby200/lib/ruby/2.0.0/webrick/httpserver.rb:138:in `service'
+  C:/Ruby200/lib/ruby/2.0.0/webrick/httpserver.rb:94:in `run'
+  C:/Ruby200/lib/ruby/2.0.0/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered C:/Ruby200/lib/ruby/gems/2.0.0/gems/actionpack-3.2.14/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+  Rendered C:/Ruby200/lib/ruby/gems/2.0.0/gems/actionpack-3.2.14/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (3.0ms)
+  Rendered C:/Ruby200/lib/ruby/gems/2.0.0/gems/actionpack-3.2.14/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (13.0ms)
+Connecting to database specified by database.yml
+DEPRECATION WARNING: You didn't set config.secret_key_base. Read the upgrade documentation to learn more about this new config option. (called from service at C:/Ruby200/lib/ruby/2.0.0/webrick/httpserver.rb:138)
+
+
+Started GET "/" for 127.0.0.1 at 2014-01-13 09:40:32 -0500
+Processing by Rails::WelcomeController#index as HTML
+  Rendered C:/Ruby200/lib/ruby/gems/2.0.0/gems/railties-4.0.2/lib/rails/templates/rails/welcome/index.html.erb (2.0ms)
+Completed 200 OK in 14ms (Views: 14.0ms | ActiveRecord: 0.0ms)
+  [1m[36m (23.0ms)[0m  [1mCREATE TABLE "phones" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "number" varchar(255), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "possible_number" varchar(255)) [0m
+  [1m[35m (23.0ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) 
+  [1m[36m (25.0ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35m (0.0ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36m (21.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20130122075331')[0m
+  [1m[35m (23.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20130121173847')
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+DEPRECATION WARNING: You didn't set config.secret_key_base. Read the upgrade documentation to learn more about this new config option. (called from service at C:/Ruby200/lib/ruby/2.0.0/webrick/httpserver.rb:138)
+
+
+Started GET "/rails/info/properties" for 127.0.0.1 at 2014-01-13 09:42:34 -0500
+Processing by Rails::InfoController#properties as */*
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  Rendered C:/Ruby200/lib/ruby/gems/2.0.0/gems/railties-4.0.2/lib/rails/templates/rails/info/properties.html.erb (2.0ms)
+Completed 200 OK in 34ms (Views: 22.0ms | ActiveRecord: 2.0ms)
+  [1m[36m (23.0ms)[0m  [1mDROP TABLE "phones"[0m
+  [1m[35m (24.0ms)[0m  CREATE TABLE "phones" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "number" varchar(255), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "possible_number" varchar(255)) 
+  [1m[36m (0.0ms)[0m  [1mSELECT version FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (1.0ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
