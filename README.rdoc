@@ -136,3 +136,5 @@ Phone class has following attributes
 Gem includes data from Google libphonenumber which has regex patterns for validations.
 Valid patterns are more specific to phone type and country.
 Possible patterns as usual are patterns with number of digits in number.
+
+To update the data with the most recent libphonenumber patterns, there is a rake task that can be run (Phonelib:import_data).
