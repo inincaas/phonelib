@@ -224,7 +224,9 @@ describe Phonelib do
   end
 
   context 'default_country' do
+    after(:all) { Phonelib.default_country = nil }
     it 'should be invalid with no default country set' do
+      Phonelib.default_country = nil
       phone = Phonelib.parse('541234567')
       expect(phone.valid?).to be_false
     end
