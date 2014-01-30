@@ -102,16 +102,14 @@ module Phonelib
       load_data
 
       country = country_or_default_country(passed_country)
-      if phone.nil? || country.nil?
-        # has to return instance of Phonelib::Phone even if no phone passed
-        Phonelib::Phone.new(phone, @@phone_data)
+      # has to return instance of Phonelib::Phone even if no phone passed
+      return create_using_full_data(phone) if phone.nil? || country.nil?
+
+      detected = detect_and_parse_by_country(phone, country)
+      if passed_country.nil? && @@default_country && detected.invalid?
+        create_using_full_data(phone)
       else
-        detected = detect_and_parse_by_country(phone, country)
-        if passed_country.nil? && @@default_country && detected.invalid?
-          Phonelib::Phone.new(phone, @@phone_data)
-        else
-          detected
-        end
+        detected
       end
     end
 
@@ -167,15 +165,15 @@ module Phonelib
       if detected
         phone = convert_phone_to_e164(phone, detected)
         if phone[0] == '+'
-          Phonelib::Phone.new(phone, @@phone_data)
-        else 
+          create_using_full_data(phone)
+        else
           Phonelib::Phone.new(phone, [detected])
         end
       end
     end
 
     # Create phone representation in e164 format
-    def convert_phone_to_e164(phone, data) #prefix, national_prefix)
+    def convert_phone_to_e164(phone, data)
       rx = []
       rx << "(#{data[Core::INTERNATIONAL_PREFIX]})?"
       rx << "(#{data[Core::COUNTRY_CODE]})?"
@@ -184,11 +182,15 @@ module Phonelib
 
       match = phone.gsub('+', '').match(/^#{rx.join}$/)
       if match
-        national_start = 1.upto(3).map {|i| match[i].to_s.length}.inject(:+)
+        national_start = 1.upto(3).map { |i| match[i].to_s.length }.inject(:+)
         "#{data[Core::COUNTRY_CODE]}#{phone[national_start..-1]}"
       else
         phone.sub(/^#{data[Core::INTERNATIONAL_PREFIX]}/, '+')
       end
+    end
+
+    def create_using_full_data(phone)
+      Phonelib::Phone.new(phone, @@phone_data)
     end
   end
 end
