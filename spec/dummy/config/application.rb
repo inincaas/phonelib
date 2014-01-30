@@ -56,3 +56,5 @@ module Dummy
     config.assets.version = '1.0'
   end
 end
+
+I18n.enforce_available_locales = false

@@ -166,7 +166,11 @@ module Phonelib
       detected = @@phone_data.find { |data| data[:id] == country }
       if detected
         phone = convert_phone_to_e164(phone, detected)
-        Phonelib::Phone.new(phone, [detected])
+        if phone[0] == '+'
+          Phonelib::Phone.new(phone, @@phone_data)
+        else 
+          Phonelib::Phone.new(phone, [detected])
+        end
       end
     end
 
