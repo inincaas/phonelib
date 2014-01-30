@@ -110,7 +110,7 @@ module Phonelib
         if passed_country.nil? && @@default_country && detected.invalid?
           Phonelib::Phone.new(phone, @@phone_data)
         else
-          Phonelib::Phone.new(detected.international, @@phone_data)
+          detected
         end
       end
     end
