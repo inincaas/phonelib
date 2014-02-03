@@ -98,18 +98,22 @@ module Phonelib
 
     # method for parsing phone number.
     # On first run fills @@phone_data with data present in yaml file
-    def parse(phone, passed_country = nil)
+    def parse(original, passed_country = nil)
       load_data
+      sanitized = sanitize_phone original
 
       country = country_or_default_country(passed_country)
-      # has to return instance of Phonelib::Phone even if no phone passed
-      return create_using_full_data(phone) if phone.nil? || country.nil?
-
-      detected = detect_and_parse_by_country(phone, country)
-      if passed_country.nil? && @@default_country && detected.invalid?
-        create_using_full_data(phone)
+      if sanitized.empty?
+        # has to return instance of Phonelib::Phone even if no phone passed
+        Phonelib::Phone.new(sanitized, original, @@phone_data)
       else
-        detected
+        detected = detect_or_parse_by_country(sanitized, original, country)
+        if passed_country.nil? && @@default_country && detected.invalid?
+          # try to detect country for number if it's invalid for specified one
+          detect_or_parse_by_country(sanitized, original)
+        else
+          detected
+        end
       end
     end
 
@@ -160,14 +164,18 @@ module Phonelib
     end
 
     # Get Phone instance for provided phone with country specified
-    def detect_and_parse_by_country(phone, country)
-      detected = @@phone_data.find { |data| data[:id] == country }
-      if detected
-        phone = convert_phone_to_e164(phone, detected)
-        if phone[0] == '+'
-          create_using_full_data(phone)
-        else
-          Phonelib::Phone.new(phone, [detected])
+    def detect_or_parse_by_country(phone, original, country = nil)
+      if country.nil?
+        Phonelib::Phone.new(phone, original, @@phone_data)
+      else
+        detected = @@phone_data.find { |data| data[:id] == country }
+        if detected
+          phone = convert_phone_to_e164(phone, detected)
+          if phone[0] == '+'
+            detect_or_parse_by_country(phone[1..-1], original)
+          else
+            Phonelib::Phone.new(phone, original, [detected])
+          end
         end
       end
     end
@@ -180,17 +188,18 @@ module Phonelib
       rx << "(#{data[Core::NATIONAL_PREFIX]})?"
       rx << "(#{data[Core::TYPES][Core::GENERAL][Core::VALID_PATTERN]})"
 
-      match = phone.gsub('+', '').match(/^#{rx.join}$/)
+      match = phone.match(/^#{rx.join}$/)
       if match
-        national_start = 1.upto(3).map { |i| match[i].to_s.length }.inject(:+)
+        national_start = (1..3).map { |i| match[i].to_s.length }.inject(:+)
         "#{data[Core::COUNTRY_CODE]}#{phone[national_start..-1]}"
       else
         phone.sub(/^#{data[Core::INTERNATIONAL_PREFIX]}/, '+')
       end
     end
 
-    def create_using_full_data(phone)
-      Phonelib::Phone.new(phone, @@phone_data)
+    # Sanitizes passed phone number. Returns only digits from passed string.
+    def sanitize_phone(phone)
+      phone && phone.gsub(/[^0-9]+/, '') || ''
     end
   end
 end

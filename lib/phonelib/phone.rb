@@ -15,9 +15,9 @@ module Phonelib
     # * +phone+ - Phone number for parsing
     # * +country_data+ - Hash of data for parsing
     #
-    def initialize(phone, country_data)
-      @original = phone
-      @sanitized = sanitize_phone(@original)
+    def initialize(sanitized, original, country_data)
+      @sanitized = sanitized
+      @original = original
       @analyzed_data = analyze_sanitized(country_data)
       if country
         @national_number,= @analyzed_data[country][:national]
@@ -146,11 +146,6 @@ module Phonelib
     end
 
     private
-
-    # Sanitizes passed phone number. Returns only digits from passed string.
-    def sanitize_phone(phone)
-      phone && phone.gsub(/[^0-9]+/, '') || ''
-    end
 
     def analyze_sanitized(country_data)
       if @sanitized.empty?
