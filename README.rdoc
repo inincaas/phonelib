@@ -1,8 +1,7 @@
 == Phonelib
 
-{<img src="https://travis-ci.org/daddyz/phonelib.png?branch=master" alt="Build Status" />}[http://travis-ci.org/daddyz/phonelib]
-{<img src="https://badge.fury.io/rb/phonelib.png" alt="Gem Version" />}[http://badge.fury.io/rb/phonelib]
-{<img src="https://codeclimate.com/github/daddyz/phonelib.png" />}[https://codeclimate.com/github/daddyz/phonelib]
+{<img src="https://travis-ci.org/inincaas/phonelib.png?branch=master" alt="Build Status" />}[http://travis-ci.org/inincaas/phonelib]
+{<img src="https://codeclimate.com/github/inincaas/phonelib.png" />}[https://codeclimate.com/github/inincaas/phonelib]
 
 Phonelib is a gem allowing you to validate phone number. All validations are based on {Google libphonenumber}[http://code.google.com/p/libphonenumber/].
 Currently it can make basic validations and formatting to e164 international number format and national number format with prefix.
@@ -18,7 +17,10 @@ http://rubydoc.info/gems/phonelib/frames
 === Bug reports
 
 If you discover a problem with Phonelib gem, let us know about it.
-https://github.com/daddyz/phonelib/issues
+https://github.com/inincaas/phonelib/issues
+
+For upstream issues report to: https://github.com/daddyz/phonelib/issues
+
 
 === Example application
 
@@ -134,3 +136,5 @@ Phone class has following attributes
 Gem includes data from Google libphonenumber which has regex patterns for validations.
 Valid patterns are more specific to phone type and country.
 Possible patterns as usual are patterns with number of digits in number.
+
+To update the data with the most recent libphonenumber patterns, there is a rake task that can be run (Phonelib:import_data).
