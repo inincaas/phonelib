@@ -19,6 +19,7 @@ module Phonelib
       @sanitized = sanitized
       @original = original
       @analyzed_data = analyze_sanitized(country_data)
+      return if @analyzed_data == {}
       if country
         @national_number,= @analyzed_data[country][:national]
       else
