@@ -4,6 +4,11 @@ module Phonelib
     # variable will include hash with data for validation
     @@phone_data = nil
 
+    # getter for phone data for other modules of gem, can be used outside
+    def phone_data
+      @@phone_data
+    end
+
     # default country for parsing variable setting
     @@default_country = nil
 
@@ -99,20 +104,8 @@ module Phonelib
     # method for parsing phone number.
     # On first run fills @@phone_data with data present in yaml file
     def parse(phone, passed_country = nil)
-      load_data
-
-      country = country_or_default_country(passed_country)
-      if phone.nil? || country.nil?
-        # has to return instance of Phonelib::Phone even if no phone passed
-        Phonelib::Phone.new(phone, @@phone_data)
-      else
-        detected = detect_and_parse_by_country(phone, country)
-        if passed_country.nil? && @@default_country && detected.invalid?
-          Phonelib::Phone.new(phone, @@phone_data)
-        else
-          detected
-        end
-      end
+      @@phone_data ||= load_data
+      Phonelib::Phone.new phone, passed_country
     end
 
     # method checks if passed phone number is valid
@@ -150,43 +143,7 @@ module Phonelib
     # Load data file into memory
     def load_data
       data_file = File.dirname(__FILE__) + '/../../data/phone_data.dat'
-      @@phone_data ||= Marshal.load(File.read(data_file))
-    end
-
-    # Get country that was provided or default country in needable format
-    def country_or_default_country(country)
-      country = country || @@default_country
-      country.to_s.upcase unless country.nil?
-    end
-
-    # Get Phone instance for provided phone with country specified
-    def detect_and_parse_by_country(phone, country)
-      detected = @@phone_data.find { |data| data[:id] == country }
-      if detected
-        phone = convert_phone_to_e164(phone, detected)
-        if phone[0] == '+'
-          Phonelib::Phone.new(phone, @@phone_data)
-        else 
-          Phonelib::Phone.new(phone, [detected])
-        end
-      end
-    end
-
-    # Create phone representation in e164 format
-    def convert_phone_to_e164(phone, data) #prefix, national_prefix)
-      rx = []
-      rx << "(#{data[Core::INTERNATIONAL_PREFIX]})?"
-      rx << "(#{data[Core::COUNTRY_CODE]})?"
-      rx << "(#{data[Core::NATIONAL_PREFIX]})?"
-      rx << "(#{data[Core::TYPES][Core::GENERAL][Core::VALID_PATTERN]})"
-
-      match = phone.gsub('+', '').match(/^#{rx.join}$/)
-      if match
-        national_start = 1.upto(3).map {|i| match[i].to_s.length}.inject(:+)
-        "#{data[Core::COUNTRY_CODE]}#{phone[national_start..-1]}"
-      else
-        phone.sub(/^#{data[Core::INTERNATIONAL_PREFIX]}/, '+')
-      end
+      Marshal.load(File.read(data_file))
     end
   end
 end
