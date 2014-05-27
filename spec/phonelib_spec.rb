@@ -202,8 +202,10 @@ describe Phonelib do
       expect(@phone.human_type).to eq('Mobile')
     end
 
-    it 'returns [:mobile] as all types' do
+    it 'returns [:mobile] as all types and possible_types' do
       expect(@phone.types).to eq([:mobile])
+      possible_types = [:premium_rate, :toll_free, :voip, :mobile]
+      expect(@phone.possible_types).to eq(possible_types)
     end
 
     it 'returns [Mobile] as all human types' do
@@ -278,10 +280,12 @@ describe Phonelib do
     it 'should parse as valid numbers with international prefix' do
       phone1 = Phonelib.parse('0049032123456789', 'GB')
       phone2 = Phonelib.parse('81049032123456789', 'RU')
+      phone3 = Phonelib.parse('81049032123456789', 'GB')
       expect(phone1.valid?).to be_true
       expect(phone1.country).to eq('DE')
       expect(phone2.valid?).to be_true
       expect(phone2.country).to eq('DE')
+      expect(phone3.valid?).to be_false
     end
   end
 
@@ -301,14 +305,26 @@ describe Phonelib do
     end
   end
 
-  context 'example numbers' do
-    it 'be valid' do
-      data_file = File.dirname(__FILE__) + '/../data/phone_data.dat'
-      phone_data = nil
-      File.open(data_file, 'rb') do |f|
-        phone_data = Marshal.load(f)
+  context 'issue #27' do
+    it 'should not raise error while parsing invalid numbers' do
+      test_cases = [
+        ['0000', 'PH'], ['0000', 'IN'],
+        ['01114552586', 'US'], ['01148209679', 'CA'],
+        ['000000000000000', 'CN'], ['0050016323', 'KR']
+      ]
+      test_cases.each_with_index do |test_case, i|
+        number, country = test_case
+        phone = Phonelib.parse number, country
+        expect(phone.valid_for_country?(country)).to be_false
       end
-      phone_data.each do |data|
+    end
+  end
+
+  context 'example numbers' do
+    it 'is valid' do
+      data_file = File.dirname(__FILE__) + '/../data/phone_data.dat'
+      phone_data = Marshal.load(File.binread(data_file))
+      phone_data.each do |key, data|
         country = data[:id]
         next unless country =~ /[A-Z]{2}/
         data[:types].each do |type, type_data|

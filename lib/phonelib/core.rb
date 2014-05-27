@@ -4,6 +4,11 @@ module Phonelib
     # variable will include hash with data for validation
     @@phone_data = nil
 
+    # getter for phone data for other modules of gem, can be used outside
+    def phone_data
+      @@phone_data
+    end
+
     # default country for parsing variable setting
     @@default_country = nil
 
@@ -98,23 +103,9 @@ module Phonelib
 
     # method for parsing phone number.
     # On first run fills @@phone_data with data present in yaml file
-    def parse(original, passed_country = nil)
-      load_data
-      sanitized = sanitize_phone original
-
-      country = country_or_default_country(passed_country)
-      if sanitized.empty?
-        # has to return instance of Phonelib::Phone even if no phone passed
-        Phonelib::Phone.new(sanitized, original, @@phone_data)
-      else
-        detected = detect_or_parse_by_country(sanitized, original, country)
-        if passed_country.nil? && @@default_country && detected.invalid?
-          # try to detect country for number if it's invalid for specified one
-          detect_or_parse_by_country(sanitized, original)
-        else
-          detected
-        end
-      end
+    def parse(phone, passed_country = nil)
+      @@phone_data ||= load_data
+      Phonelib::Phone.new phone, passed_country
     end
 
     # method checks if passed phone number is valid
@@ -152,9 +143,7 @@ module Phonelib
     # Load data file into memory
     def load_data
       data_file = File.dirname(__FILE__) + '/../../data/phone_data.dat'
-      File.open(data_file, 'rb') do |f|
-        @@phone_data ||= Marshal.load(f)
-      end
+      @@phone_data ||= Marshal.load(File.binread(data_file))
     end
 
     # Get country that was provided or default country in needable format

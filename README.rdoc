@@ -50,12 +50,15 @@ Please note that passing blank value also fails.
 
 Additional options:
 
-  validates :attribute, phone: { possible: true, allow_blank: true }
+  validates :attribute, phone: { possible: true, allow_blank: true, types: [:voip, :mobile] }
 
 <tt>possible: true</tt> - enables validation to check whether the passed number is a possible phone number (not strict check).
 Refer to {Google libphonenumber}[http://code.google.com/p/libphonenumber/] for more information on it.
 
 <tt>allow_blank: true</tt> - when no value passed then validation passes
+
+<tt>types: :mobile</tt> or <tt>types: [:voip, :mobile]</tt> - allows to validate against specific phone types patterns,
+if mixed with <tt>possible</tt> will check if number is possible for specified type
 
 === Basic usage
 
@@ -95,8 +98,9 @@ Returned value is object of <tt>Phonelib::Phone</tt> class which have following 
 
 You can also fetch matched valid phone types
 
-  phone.types # returns array of all valid types
-  phone.type  # returns first element from array of all valid types
+  phone.types          # returns array of all valid types
+  phone.type           # returns first element from array of all valid types
+  phone.possible_types # returns array of all possible types
 
 Possible types:
 * <tt>:premium_rate</tt> - Premium Rate
@@ -136,5 +140,19 @@ Phone class has following attributes
 Gem includes data from Google libphonenumber which has regex patterns for validations.
 Valid patterns are more specific to phone type and country.
 Possible patterns as usual are patterns with number of digits in number.
+
+=== Development and tests
+
+Everyone can do whatever he wants, the only limit is your imagination.
+Just don't forget to write test before the pull request.
+In order to run test without Rails functionality simply use
+
+  bundle exec rake spec
+
+If you want to run including Rails environment, you need to set <tt>BUNDLE_GEMFILE</tt> while running the spec task, for example:
+
+  BUNDLE_GEMFILE=gemfiles/Gemfile.rails-3.2.x bundle exec rake spec
+
+Gemfiles can be found in <tt>gemfiles</tt> folder, there are gemfiles for Rails 3.1, 3.2 and 4.
 
 To update the data with the most recent libphonenumber patterns, there is a rake task that can be run (Phonelib:import_data).
