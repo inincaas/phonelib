@@ -9,3 +9,5 @@ spec/dummy/tmp/
 spec/dummy/.sass-cache
 data/PhoneNumberMetaData.xml
 gemfiles/*.lock
+
+Gemfile.lock
